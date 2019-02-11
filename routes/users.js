@@ -77,7 +77,7 @@ router.post('/register', stillAuthenticated, (req, res) => {
 });
 
 // Login
-router.post('/login', (req, res, next) => {
+router.post('/login', stillAuthenticated, (req, res, next) => {
   passport.authenticate('local', {
     successRedirect: '/dashboard',
     failureRedirect: '/users/login',
@@ -86,7 +86,7 @@ router.post('/login', (req, res, next) => {
 });
 
 // Logout
-router.get('/logout', (req, res) => {
+router.get('/logout', ensureAuthenticated, (req, res) => {
   req.logout();
   req.flash('success_msg', 'You are logged out');
   res.redirect('/users/login');
