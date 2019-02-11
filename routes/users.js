@@ -10,10 +10,10 @@ const User = require('../models/user');
 router.get('/login', stillAuthenticated, (req, res) => res.render('login'));
 
 // Register Page
-router.get('/register', (req, res) => res.render('register'));
+router.get('/register', stillAuthenticated, (req, res) => res.render('register'));
 
 // Register
-router.post('/register', (req, res) => {
+router.post('/register', stillAuthenticated, (req, res) => {
   const { name, email, password, password2 } = req.body;
   let errors = [];
 
